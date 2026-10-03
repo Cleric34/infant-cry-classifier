@@ -1,0 +1,11 @@
+ablation,variant,n_train,n_feat,val_macro_f1,val_bacc,val_acc,test_macro_f1,test_bacc,test_acc
+1 denoise,DTCWT-denoised,2414,273,0.7736,0.7857,0.8333,0.7813,0.7910,0.8548
+1 denoise,raw (no denoise),2414,273,0.7706,0.7767,0.8374,0.8066,0.8209,0.8712
+2 train set,"augmented (03), no weights",4000,4098,0.7810,0.7708,0.8498,0.7986,0.7963,0.8712
+2 train set,original-only + class weights,2414,4098,0.7840,0.7748,0.8477,0.7888,0.7879,0.8609
+2 train set,"original-only, no weights",2414,4098,0.8004,0.7780,0.8621,0.8016,0.7963,0.8712
+3 features,kymatio+mfcc,2414,4098,0.7840,0.7748,0.8477,0.7888,0.7879,0.8609
+3 features,pitch,2414,29,0.7124,0.7107,0.7922,0.7051,0.7174,0.7996
+3 features,embeddings,2414,1536,0.7303,0.7138,0.8004,0.7213,0.7134,0.8160
+3 features,panns,2414,2048,0.7411,0.7308,0.8251,0.7028,0.7030,0.7853
+3 features,concat: kymatio+mfcc + pitch + embeddings + panns,2414,7711,0.7898,0.7818,0.8580,0.7957,0.7887,0.8691

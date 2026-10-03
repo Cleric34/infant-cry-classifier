@@ -1,0 +1,108 @@
+{
+  "classes": [
+    "burping",
+    "needs",
+    "physical_pain",
+    "scared"
+  ],
+  "best_by_val_macro_f1": "ens_soft_top2",
+  "ece": {
+    "val": 0.039402410229699474,
+    "test": 0.03893639437160676
+  },
+  "candidates": {
+    "lgbm_features_pitch": {
+      "members": [
+        "lgbm_features_pitch"
+      ],
+      "basis": "direct",
+      "val_f1": 0.6998221062618595,
+      "test_f1": 0.7053715947608067
+    },
+    "lgbm_features_v2": {
+      "members": [
+        "lgbm_features_v2"
+      ],
+      "basis": "direct",
+      "val_f1": 0.7867478492543268,
+      "test_f1": 0.8081816322215907
+    },
+    "lgbm_features_wav2vec2": {
+      "members": [
+        "lgbm_features_wav2vec2"
+      ],
+      "basis": "direct",
+      "val_f1": 0.7231833591448213,
+      "test_f1": 0.6775193749785
+    },
+    "xgb_features_pitch": {
+      "members": [
+        "xgb_features_pitch"
+      ],
+      "basis": "direct",
+      "val_f1": 0.70972082541811,
+      "test_f1": 0.709197698892973
+    },
+    "xgb_features_v2": {
+      "members": [
+        "xgb_features_v2"
+      ],
+      "basis": "direct",
+      "val_f1": 0.7938402360130243,
+      "test_f1": 0.7919971110268511
+    },
+    "xgb_features_wav2vec2": {
+      "members": [
+        "xgb_features_wav2vec2"
+      ],
+      "basis": "direct",
+      "val_f1": 0.7030995701807312,
+      "test_f1": 0.7241528667240392
+    },
+    "ens_soft_top2": {
+      "members": [
+        "xgb_features_v2",
+        "lgbm_features_v2"
+      ],
+      "basis": "direct",
+      "val_f1": 0.7947594911567141,
+      "test_f1": 0.8063073299649377
+    },
+    "ens_soft_top3": {
+      "members": [
+        "xgb_features_v2",
+        "lgbm_features_v2",
+        "lgbm_features_wav2vec2"
+      ],
+      "basis": "direct",
+      "val_f1": 0.7897278529684929,
+      "test_f1": 0.8046264699403858
+    },
+    "ens_soft_all": {
+      "members": [
+        "xgb_features_v2",
+        "lgbm_features_v2",
+        "lgbm_features_wav2vec2",
+        "xgb_features_pitch",
+        "xgb_features_wav2vec2",
+        "lgbm_features_pitch"
+      ],
+      "basis": "direct",
+      "val_f1": 0.7910028577275617,
+      "test_f1": 0.7927995828337517
+    },
+    "ens_stack": {
+      "members": [
+        "lgbm_features_pitch",
+        "lgbm_features_v2",
+        "lgbm_features_wav2vec2",
+        "xgb_features_pitch",
+        "xgb_features_v2",
+        "xgb_features_wav2vec2"
+      ],
+      "basis": "5-fold CV on val",
+      "val_f1": 0.8053926903437355,
+      "test_f1": 0.7711238632894073
+    }
+  }
+}

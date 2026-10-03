@@ -1,0 +1,330 @@
+{
+  "burping": [
+    {
+      "feature": "rms_mean",
+      "mean_abs_shap": 0.3542003929615021
+    },
+    {
+      "feature": "f0_mean",
+      "mean_abs_shap": 0.20330774784088135
+    },
+    {
+      "feature": "hnr_proxy_db",
+      "mean_abs_shap": 0.17855387926101685
+    },
+    {
+      "feature": "bandwidth_std",
+      "mean_abs_shap": 0.17374004423618317
+    },
+    {
+      "feature": "rms_max",
+      "mean_abs_shap": 0.15544722974300385
+    },
+    {
+      "feature": "zcr_std",
+      "mean_abs_shap": 0.12956251204013824
+    },
+    {
+      "feature": "zcr_mean",
+      "mean_abs_shap": 0.12090546637773514
+    },
+    {
+      "feature": "bandwidth_mean",
+      "mean_abs_shap": 0.11911721527576447
+    },
+    {
+      "feature": "f0_max",
+      "mean_abs_shap": 0.10940227657556534
+    },
+    {
+      "feature": "f0_slope",
+      "mean_abs_shap": 0.10880058258771896
+    },
+    {
+      "feature": "f0_std",
+      "mean_abs_shap": 0.10854199528694153
+    },
+    {
+      "feature": "f0_median",
+      "mean_abs_shap": 0.10792671144008636
+    },
+    {
+      "feature": "voiced_seg_mean",
+      "mean_abs_shap": 0.0965176373720169
+    },
+    {
+      "feature": "duration_s",
+      "mean_abs_shap": 0.09260176122188568
+    },
+    {
+      "feature": "rms_max_time",
+      "mean_abs_shap": 0.09166672080755234
+    },
+    {
+      "feature": "pause_max",
+      "mean_abs_shap": 0.07305730879306793
+    },
+    {
+      "feature": "rms_std",
+      "mean_abs_shap": 0.06555764377117157
+    },
+    {
+      "feature": "flatness_mean",
+      "mean_abs_shap": 0.06442134827375412
+    },
+    {
+      "feature": "voiced_seg_max",
+      "mean_abs_shap": 0.06117388978600502
+    },
+    {
+      "feature": "f0_range",
+      "mean_abs_shap": 0.0601135715842247
+    }
+  ],
+  "needs": [
+    {
+      "feature": "rms_std",
+      "mean_abs_shap": 0.3699943721294403
+    },
+    {
+      "feature": "flatness_std",
+      "mean_abs_shap": 0.20566904544830322
+    },
+    {
+      "feature": "rms_max",
+      "mean_abs_shap": 0.16820071637630463
+    },
+    {
+      "feature": "rolloff_std",
+      "mean_abs_shap": 0.16217680275440216
+    },
+    {
+      "feature": "centroid_std",
+      "mean_abs_shap": 0.13586308062076569
+    },
+    {
+      "feature": "f0_range",
+      "mean_abs_shap": 0.12157026678323746
+    },
+    {
+      "feature": "rms_mean",
+      "mean_abs_shap": 0.11712688207626343
+    },
+    {
+      "feature": "bandwidth_mean",
+      "mean_abs_shap": 0.11671030521392822
+    },
+    {
+      "feature": "rms_max_time",
+      "mean_abs_shap": 0.10830900818109512
+    },
+    {
+      "feature": "flatness_mean",
+      "mean_abs_shap": 0.10237663239240646
+    },
+    {
+      "feature": "zcr_std",
+      "mean_abs_shap": 0.10121863335371017
+    },
+    {
+      "feature": "bandwidth_std",
+      "mean_abs_shap": 0.09060198813676834
+    },
+    {
+      "feature": "f0_max",
+      "mean_abs_shap": 0.0769977942109108
+    },
+    {
+      "feature": "f0_slope",
+      "mean_abs_shap": 0.07523399591445923
+    },
+    {
+      "feature": "duration_s",
+      "mean_abs_shap": 0.0712612122297287
+    },
+    {
+      "feature": "rolloff_mean",
+      "mean_abs_shap": 0.06050346419215202
+    },
+    {
+      "feature": "f0_median",
+      "mean_abs_shap": 0.057122744619846344
+    },
+    {
+      "feature": "zcr_mean",
+      "mean_abs_shap": 0.05325435847043991
+    },
+    {
+      "feature": "voiced_seg_max",
+      "mean_abs_shap": 0.044479355216026306
+    },
+    {
+      "feature": "voiced_seg_mean",
+      "mean_abs_shap": 0.04351409524679184
+    }
+  ],
+  "physical_pain": [
+    {
+      "feature": "hnr_proxy_db",
+      "mean_abs_shap": 0.2392284870147705
+    },
+    {
+      "feature": "zcr_mean",
+      "mean_abs_shap": 0.20216041803359985
+    },
+    {
+      "feature": "duration_s",
+      "mean_abs_shap": 0.16446873545646667
+    },
+    {
+      "feature": "f0_max",
+      "mean_abs_shap": 0.15887495875358582
+    },
+    {
+      "feature": "pause_mean",
+      "mean_abs_shap": 0.1389777511358261
+    },
+    {
+      "feature": "f0_median",
+      "mean_abs_shap": 0.11993366479873657
+    },
+    {
+      "feature": "pause_max",
+      "mean_abs_shap": 0.117387555539608
+    },
+    {
+      "feature": "rms_max_time",
+      "mean_abs_shap": 0.11568067222833633
+    },
+    {
+      "feature": "f0_mean",
+      "mean_abs_shap": 0.1076359823346138
+    },
+    {
+      "feature": "f0_std",
+      "mean_abs_shap": 0.10679993778467178
+    },
+    {
+      "feature": "voiced_seg_max",
+      "mean_abs_shap": 0.10634075105190277
+    },
+    {
+      "feature": "flatness_mean",
+      "mean_abs_shap": 0.1048239916563034
+    },
+    {
+      "feature": "rolloff_std",
+      "mean_abs_shap": 0.10476808249950409
+    },
+    {
+      "feature": "rms_max",
+      "mean_abs_shap": 0.10231315344572067
+    },
+    {
+      "feature": "bandwidth_std",
+      "mean_abs_shap": 0.08670467883348465
+    },
+    {
+      "feature": "voiced_seg_mean",
+      "mean_abs_shap": 0.0837460458278656
+    },
+    {
+      "feature": "bandwidth_mean",
+      "mean_abs_shap": 0.07805497199296951
+    },
+    {
+      "feature": "flatness_std",
+      "mean_abs_shap": 0.07684312760829926
+    },
+    {
+      "feature": "f0_min",
+      "mean_abs_shap": 0.07548854500055313
+    },
+    {
+      "feature": "f0_range",
+      "mean_abs_shap": 0.07502874732017517
+    }
+  ],
+  "scared": [
+    {
+      "feature": "rms_max_time",
+      "mean_abs_shap": 0.3673439919948578
+    },
+    {
+      "feature": "f0_median",
+      "mean_abs_shap": 0.3535636365413666
+    },
+    {
+      "feature": "duration_s",
+      "mean_abs_shap": 0.3233456313610077
+    },
+    {
+      "feature": "zcr_std",
+      "mean_abs_shap": 0.24922262132167816
+    },
+    {
+      "feature": "f0_slope",
+      "mean_abs_shap": 0.23126935958862305
+    },
+    {
+      "feature": "hnr_proxy_db",
+      "mean_abs_shap": 0.2273639440536499
+    },
+    {
+      "feature": "flatness_std",
+      "mean_abs_shap": 0.22485746443271637
+    },
+    {
+      "feature": "f0_mean",
+      "mean_abs_shap": 0.1688106656074524
+    },
+    {
+      "feature": "rms_std",
+      "mean_abs_shap": 0.14859260618686676
+    },
+    {
+      "feature": "rolloff_std",
+      "mean_abs_shap": 0.13072966039180756
+    },
+    {
+      "feature": "f0_max",
+      "mean_abs_shap": 0.1186932846903801
+    },
+    {
+      "feature": "rms_mean",
+      "mean_abs_shap": 0.118616484105587
+    },
+    {
+      "feature": "centroid_std",
+      "mean_abs_shap": 0.1119336411356926
+    },
+    {
+      "feature": "flatness_mean",
+      "mean_abs_shap": 0.10904891043901443
+    },
+    {
+      "feature": "voiced_seg_max",
+      "mean_abs_shap": 0.1080889031291008
+    },
+    {
+      "feature": "rms_max",
+      "mean_abs_shap": 0.10583363473415375
+    },
+    {
+      "feature": "bandwidth_mean",
+      "mean_abs_shap": 0.10155734419822693
+    },
+    {
+      "feature": "pause_mean",
+      "mean_abs_shap": 0.09694382548332214
+    },
+    {
+      "feature": "pause_max",
+      "mean_abs_shap": 0.08943173289299011
+    },
+    {
+      "feature": "voiced_fraction",
+      "mean_abs_shap": 0.07807876169681549
+    }
+  ]
+}

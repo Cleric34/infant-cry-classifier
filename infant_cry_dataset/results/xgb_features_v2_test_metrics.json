@@ -1,0 +1,71 @@
+{
+  "name": "xgb_features_v2_test",
+  "n": 489,
+  "accuracy": 0.8670756646216768,
+  "balanced_accuracy": 0.7826603117700244,
+  "macro_f1": 0.7919971110268511,
+  "per_class": {
+    "burping": {
+      "precision": 0.7,
+      "recall": 0.45161290322580644,
+      "f1": 0.5490196078431373,
+      "support": 31
+    },
+    "needs": {
+      "precision": 0.9003215434083601,
+      "recall": 0.9003215434083601,
+      "f1": 0.9003215434083601,
+      "support": 311
+    },
+    "physical_pain": {
+      "precision": 0.7325581395348837,
+      "recall": 0.8076923076923077,
+      "f1": 0.7682926829268293,
+      "support": 78
+    },
+    "scared": {
+      "precision": 0.9305555555555556,
+      "recall": 0.9710144927536232,
+      "f1": 0.950354609929078,
+      "support": 69
+    }
+  },
+  "confusion_matrix": [
+    [
+      14,
+      15,
+      2,
+      0
+    ],
+    [
+      6,
+      280,
+      20,
+      5
+    ],
+    [
+      0,
+      15,
+      63,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      67
+    ]
+  ],
+  "class_names": [
+    "burping",
+    "needs",
+    "physical_pain",
+    "scared"
+  ],
+  "majority_baseline": {
+    "accuracy": 0.6359918200408998,
+    "balanced_accuracy": 0.25,
+    "macro_f1": 0.194375,
+    "class": "needs"
+  }
+}

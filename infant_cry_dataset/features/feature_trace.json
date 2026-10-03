@@ -1,0 +1,52 @@
+{
+  "sampling_rate_hz": 22050,
+  "n_mels": 64,
+  "n_fft": 1024,
+  "hop_length": 256,
+  "fmin_hz": 20,
+  "fmax_hz": 11025,
+  "mel_power": 2.0,
+  "mel_normalization": "(mel_db - mean) / (std + 1e-8)",
+  "graph_type": "path graph",
+  "graph_nodes": 64,
+  "graph_edges": 63,
+  "graph_laplacian": "symmetric normalized Laplacian",
+  "laplacian_shape": [
+    64,
+    64
+  ],
+  "wavelet_filter": "g_s(lambda)=(s*lambda)^2*exp(-(s*lambda)^2/2)",
+  "scales": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "scattering_order": 2,
+  "first_order_feature_count": 4,
+  "second_order_feature_count": 16,
+  "total_feature_count": 20,
+  "pooling": "mean over graph nodes and time",
+  "feature_names": [
+    "S1_s1",
+    "S1_s2",
+    "S1_s3",
+    "S1_s4",
+    "S2_s1_s1",
+    "S2_s1_s2",
+    "S2_s1_s3",
+    "S2_s1_s4",
+    "S2_s2_s1",
+    "S2_s2_s2",
+    "S2_s2_s3",
+    "S2_s2_s4",
+    "S2_s3_s1",
+    "S2_s3_s2",
+    "S2_s3_s3",
+    "S2_s3_s4",
+    "S2_s4_s1",
+    "S2_s4_s2",
+    "S2_s4_s3",
+    "S2_s4_s4"
+  ]
+}

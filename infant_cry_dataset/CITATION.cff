@@ -1,0 +1,25 @@
+cff-version: 1.2.0
+title: "Infant Cry Classification Dataset (4 Classes)"
+message: "If you use this dataset, please cite as below."
+authors:
+  - family-names: "Eletriby"
+    given-names: "Karim A."
+    affiliation: "Faculty of Artificial Intelligence, Delta University"
+type: dataset
+version: "2.0"
+date-released: 2026-05-02
+license: CC-BY-NC-4.0
+keywords:
+  - infant cry classification
+  - audio classification
+  - baby sounds
+  - deep learning
+  - HuBERT
+  - audio dataset
+abstract: >
+  A cleaned, deduplicated, and speaker-aware dataset of 4,871 infant cry
+  recordings organized into 4 acoustically distinct classes (scared, needs,
+  physical_pain, burping). Built from 3 public corpora with extensive quality
+  control including MFCC fingerprint deduplication, voice-activity trimming,
+  and LUFS-based loudness normalization. Intended for training cry-type
+  classifiers in research and assistive applications.

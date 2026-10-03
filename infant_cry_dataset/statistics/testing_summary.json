@@ -1,0 +1,9 @@
+{
+  "alpha": 0.05,
+  "multiple_comparison_correction": "Benjamini-Hochberg FDR",
+  "testing_dataset": "original training recordings only",
+  "n_original_training_samples": 2414,
+  "n_features": 20,
+  "n_selected_features": 19,
+  "selection_rule": "ANOVA and Kruskal-Wallis both significant after FDR correction"
+}

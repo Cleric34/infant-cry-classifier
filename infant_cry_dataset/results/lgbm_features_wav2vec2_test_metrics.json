@@ -1,0 +1,71 @@
+{
+  "name": "lgbm_features_wav2vec2_test",
+  "n": 489,
+  "accuracy": 0.7648261758691206,
+  "balanced_accuracy": 0.7086288215151358,
+  "macro_f1": 0.6775193749785,
+  "per_class": {
+    "burping": {
+      "precision": 0.3870967741935484,
+      "recall": 0.3870967741935484,
+      "f1": 0.3870967741935484,
+      "support": 31
+    },
+    "needs": {
+      "precision": 0.8722627737226277,
+      "recall": 0.7684887459807074,
+      "f1": 0.8170940170940171,
+      "support": 311
+    },
+    "physical_pain": {
+      "precision": 0.5794392523364486,
+      "recall": 0.7948717948717948,
+      "f1": 0.6702702702702703,
+      "support": 78
+    },
+    "scared": {
+      "precision": 0.7922077922077922,
+      "recall": 0.8840579710144928,
+      "f1": 0.8356164383561644,
+      "support": 69
+    }
+  },
+  "confusion_matrix": [
+    [
+      12,
+      16,
+      2,
+      1
+    ],
+    [
+      18,
+      239,
+      40,
+      14
+    ],
+    [
+      1,
+      14,
+      62,
+      1
+    ],
+    [
+      0,
+      5,
+      3,
+      61
+    ]
+  ],
+  "class_names": [
+    "burping",
+    "needs",
+    "physical_pain",
+    "scared"
+  ],
+  "majority_baseline": {
+    "accuracy": 0.6359918200408998,
+    "balanced_accuracy": 0.25,
+    "macro_f1": 0.194375,
+    "class": "needs"
+  }
+}

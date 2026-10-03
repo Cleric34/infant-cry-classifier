@@ -1,0 +1,71 @@
+{
+  "name": "lgbm_features_v2_test",
+  "n": 489,
+  "accuracy": 0.8732106339468303,
+  "balanced_accuracy": 0.8067970116016728,
+  "macro_f1": 0.8081816322215907,
+  "per_class": {
+    "burping": {
+      "precision": 0.6956521739130435,
+      "recall": 0.5161290322580645,
+      "f1": 0.5925925925925926,
+      "support": 31
+    },
+    "needs": {
+      "precision": 0.9144736842105263,
+      "recall": 0.8938906752411575,
+      "f1": 0.9040650406504065,
+      "support": 311
+    },
+    "physical_pain": {
+      "precision": 0.7333333333333333,
+      "recall": 0.8461538461538461,
+      "f1": 0.7857142857142857,
+      "support": 78
+    },
+    "scared": {
+      "precision": 0.9305555555555556,
+      "recall": 0.9710144927536232,
+      "f1": 0.950354609929078,
+      "support": 69
+    }
+  },
+  "confusion_matrix": [
+    [
+      16,
+      14,
+      1,
+      0
+    ],
+    [
+      7,
+      278,
+      21,
+      5
+    ],
+    [
+      0,
+      12,
+      66,
+      0
+    ],
+    [
+      0,
+      0,
+      2,
+      67
+    ]
+  ],
+  "class_names": [
+    "burping",
+    "needs",
+    "physical_pain",
+    "scared"
+  ],
+  "majority_baseline": {
+    "accuracy": 0.6359918200408998,
+    "balanced_accuracy": 0.25,
+    "macro_f1": 0.194375,
+    "class": "needs"
+  }
+}

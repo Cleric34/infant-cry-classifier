@@ -1,0 +1,128 @@
+{
+  "train": {
+    "file": "infant_cry_dataset/split\\train\\burping\\005d061ffd31.wav",
+    "sampling_rate_hz": 22050,
+    "raw_waveform_samples": 152145,
+    "raw_duration_seconds": 6.9,
+    "fixed_waveform_samples": 87685,
+    "fixed_duration_seconds": 3.976643990929705,
+    "padded_or_cropped": "cropped",
+    "mel_shape": [
+      64,
+      343
+    ],
+    "node_feature_shape": [
+      64,
+      20
+    ],
+    "global_feature_shape": [
+      20
+    ],
+    "feature_names": [
+      "S1_s1",
+      "S1_s2",
+      "S1_s3",
+      "S1_s4",
+      "S2_s1_s1",
+      "S2_s1_s2",
+      "S2_s1_s3",
+      "S2_s1_s4",
+      "S2_s2_s1",
+      "S2_s2_s2",
+      "S2_s2_s3",
+      "S2_s2_s4",
+      "S2_s3_s1",
+      "S2_s3_s2",
+      "S2_s3_s3",
+      "S2_s3_s4",
+      "S2_s4_s1",
+      "S2_s4_s2",
+      "S2_s4_s3",
+      "S2_s4_s4"
+    ]
+  },
+  "val": {
+    "file": "infant_cry_dataset/split\\val\\burping\\141dbbd51c25.wav",
+    "sampling_rate_hz": 22050,
+    "raw_waveform_samples": 31091,
+    "raw_duration_seconds": 1.4100226757369614,
+    "fixed_waveform_samples": 87685,
+    "fixed_duration_seconds": 3.976643990929705,
+    "padded_or_cropped": "padded",
+    "mel_shape": [
+      64,
+      343
+    ],
+    "node_feature_shape": [
+      64,
+      20
+    ],
+    "global_feature_shape": [
+      20
+    ],
+    "feature_names": [
+      "S1_s1",
+      "S1_s2",
+      "S1_s3",
+      "S1_s4",
+      "S2_s1_s1",
+      "S2_s1_s2",
+      "S2_s1_s3",
+      "S2_s1_s4",
+      "S2_s2_s1",
+      "S2_s2_s2",
+      "S2_s2_s3",
+      "S2_s2_s4",
+      "S2_s3_s1",
+      "S2_s3_s2",
+      "S2_s3_s3",
+      "S2_s3_s4",
+      "S2_s4_s1",
+      "S2_s4_s2",
+      "S2_s4_s3",
+      "S2_s4_s4"
+    ]
+  },
+  "test": {
+    "file": "infant_cry_dataset/split\\test\\burping\\02416fcef2a2.wav",
+    "sampling_rate_hz": 22050,
+    "raw_waveform_samples": 87980,
+    "raw_duration_seconds": 3.9900226757369612,
+    "fixed_waveform_samples": 87685,
+    "fixed_duration_seconds": 3.976643990929705,
+    "padded_or_cropped": "cropped",
+    "mel_shape": [
+      64,
+      343
+    ],
+    "node_feature_shape": [
+      64,
+      20
+    ],
+    "global_feature_shape": [
+      20
+    ],
+    "feature_names": [
+      "S1_s1",
+      "S1_s2",
+      "S1_s3",
+      "S1_s4",
+      "S2_s1_s1",
+      "S2_s1_s2",
+      "S2_s1_s3",
+      "S2_s1_s4",
+      "S2_s2_s1",
+      "S2_s2_s2",
+      "S2_s2_s3",
+      "S2_s2_s4",
+      "S2_s3_s1",
+      "S2_s3_s2",
+      "S2_s3_s3",
+      "S2_s3_s4",
+      "S2_s4_s1",
+      "S2_s4_s2",
+      "S2_s4_s3",
+      "S2_s4_s4"
+    ]
+  }
+}

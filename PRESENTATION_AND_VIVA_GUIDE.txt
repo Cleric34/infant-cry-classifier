@@ -1,0 +1,282 @@
+====================================================================================================
+               INFANT CRY CLASSIFICATION PIPELINE: PRESENTATION & VIVA GUIDE
+====================================================================================================
+Team Members: Yashik, Shivesh, Shriarya
+Package File: infant_cry_final_submission_package.zip
+Evaluation Protocol: 5-Fold Stratified Group Cross-Validation (Repeat 0, n=4,871 real files)
+Target Classes: 0: burping (310), 1: needs (3,103), 2: physical_pain (774), 3: scared (684)
+
+====================================================================================================
+SECTION 1: MASTER OVERVIEW (EVERYONE MUST KNOW THIS)
+====================================================================================================
+
+1. THE GOAL:
+   Build an automated 4-class infant cry classifier to detect physiological and emotional states:
+   - Burping: Gas discomfort / needs burping (310 recordings, ~6.4%)
+   - Needs: Hunger / diaper / general distress (3,103 recordings, ~63.7% - dominant class)
+   - Physical Pain: Acute pain distress (774 recordings, ~15.9%)
+   - Scared: Startle reflex / sudden fear (684 recordings, ~14.0%)
+   Total Dataset: 4,871 real audio recordings sampled at 22,050 Hz.
+
+2. THE THREE MAJOR PROBLEMS SOLVED:
+   a. Class Imbalance: 63.7% 'Needs' vs 6.4% 'Burping'. Naive models guess 'Needs' and fail on minorities.
+   b. Data Leakage in Random Splits: Random 80/10/10 splits put same-baby recordings in train and test.
+      We built AI-clustered pseudo-sessions and evaluated with StratifiedGroupKFold (no group crosses folds).
+   c. Silence Padding Artifacts: Zero-padding short clips to 3.98s diluted acoustic stats with silence.
+      Switching to true-length audio extraction boosted PANNs model accuracy from 53.69% to 78.94%.
+
+3. THE WINNING ARCHITECTURE:
+   Logit-Adjusted Multinomial Logistic Stacker combining:
+   - 4-Way Foundation Model Neural Head (6,656-d embeddings from AST, WavLM, wav2vec2, PANNs) with Focal Loss
+   - LightGBM on Scattering + Spectral + Pitch + Shape (dropping redundant MFCCs)
+   - LightGBM on true-length V2CV features
+   - LightGBM on full V3 features
+
+4. THE FINAL BENCHMARK NUMBERS:
+   - Accuracy: 87.66% (95% CI: [86.57%, 88.75%])
+   - Macro F1: 0.7993 (95% CI: [0.7812, 0.8162])
+   - Balanced Accuracy: 77.72% (95% CI: [75.76%, 79.53%])
+   - Burping Recall: 49.0% (up from 31% in baseline)
+   - Statistically Significant Gain: +3.57% accuracy (95% CI: [+2.65%, +4.48%], p < 0.05).
+
+====================================================================================================
+SECTION 2: PERSON 1 - YASHIK
+====================================================================================================
+Role: Project Lead, Signal Denoising, Grouped Cross-Validation Protocol & Final Results
+
+Associated Code Files:
+  - 01_dtcwt_denoise.py                 (Wavelet signal cleaning)
+  - 02_split_classwise.py               (Historical split analysis & leakage audit)
+  - 21_build_cv.py                      (Master manifest, PANNs clustering, Group K-Fold)
+  - 21_cv_utils.py                      (Vectorized group bootstrap scoring engine)
+  - infant_cry_dataset/cv/master.csv    (Ground-truth dataset manifest, 4,871 rows)
+  - infant_cry_dataset/results/summary_v2.md (Final evaluation markdown summary)
+
+--- SPOKEN PRESENTATION SCRIPT FOR YASHIK ---
+"Good morning/afternoon, professors. I will introduce our project on 4-Class Acoustic Infant Cry
+Classification, explain our audio preprocessing pipeline, our leak-free evaluation methodology, and
+summarize the overall results.
+
+An infant's cry is their primary biological signaling mechanism. Distinguishing between normal hunger
+('Needs'), gas discomfort ('Burping'), sharp somatic distress ('Physical Pain'), and startle fear
+('Scared') is crucial for clinical monitoring.
+
+Our dataset contains 4,871 real audio recordings. The central challenge is severe class imbalance:
+'Needs' comprises 63.7% of the dataset (3,103 files), while 'Burping' comprises only 6.4% (310 files).
+Naive systems simply predict the majority class and fail on minority cries.
+
+First, in '01_dtcwt_denoise.py', we implemented Dual-Tree Complex Wavelet Transform (DTCWT) denoising.
+Unlike standard Fourier filtering which causes phase distortion and blurs cry attack edges, DTCWT is
+shift-invariant and isolates baby cry formants from background hospital noise, room echo, and microphone
+hiss without distorting temporal transients.
+
+Second, in '21_build_cv.py' and '21_cv_utils.py', we established an honest 5-Fold Stratified Group
+Cross-Validation protocol across all 4,871 real files. Because recordings in infant datasets often come
+from the same infant in repeated bursts, a naive random split causes severe data leakage where models
+memorize specific baby voices. Because our filenames lacked baby IDs, we extracted deep neural embeddings
+using PANNs, ran agglomerative cosine clustering to group near-duplicate recordings into pseudo-sessions,
+and assigned folds with StratifiedGroupKFold such that no session ever spans train and test folds.
+
+Finally, we evaluated statistical confidence using 2,000-sample vectorized group bootstrap intervals.
+Our final model achieves 87.66% accuracy and 0.7993 Macro F1, representing a statistically significant
+improvement of +3.57% over baseline (p < 0.05). Shivesh will now explain our handcrafted feature
+engineering and ablation discoveries."
+
+--- EXPECTED VIVA QUESTIONS & ANSWERS FOR YASHIK ---
+
+Q1: Why did you use Dual-Tree Complex Wavelet Transform (DTCWT) instead of standard FFT filtering?
+A1: Standard discrete wavelet transform (DWT) and Fourier filtering suffer from shift-variance and
+    phase artifacts around sudden acoustic spikes. DTCWT uses two parallel real DWT trees with Hilbert
+    transform pairs, providing shift-invariance and directional selectivity. This cleans ambient hiss
+    while preserving sharp crying onsets.
+
+Q2: What is data leakage in audio datasets, and how did your grouping solve it?
+A2: Data leakage happens when audio slices from the same infant or recording session sit in both training
+    and testing sets. The model learns acoustic traits of the room or infant rather than generalized cry
+    types. We grouped files using cosine similarity on deep neural embeddings and used StratifiedGroupKFold
+    so that entire recording clusters stay isolated in either train or test.
+
+Q3: Why did you report Macro F1 and Balanced Accuracy instead of just Accuracy?
+A3: Because 63.7% of the dataset is 'Needs'. A naive baseline guessing 'Needs' 100% of the time gets
+    63.7% accuracy with 0% recall on Burping, Pain, and Scared. Macro F1 averages the F1 scores across
+    all four classes equally, strictly penalizing models that fail on minority classes.
+
+Q4: What is master.csv and what columns does it contain?
+A4: 'master.csv' (in infant_cry_dataset/cv/) is the single source of truth for all 4,871 real files.
+    It contains: key, path, y (0-3 class integer), class name, group (cluster ID), old_split (historical
+    train/val/test tag), and fold_r0, fold_r1, fold_r2 (fold assignments across 3 cross-validation repeats).
+
+====================================================================================================
+SECTION 3: PERSON 2 - SHIVESH
+====================================================================================================
+Role: Handcrafted Acoustic Features, Block Ablations, Augmentation Policy & Gradient Boosting
+
+Associated Code Files:
+  - 22_build_aug_pool.py                (Deterministic 2-copies-per-clip pool generation)
+  - 22_extract_v2cv.py                  (True-length V2 feature extraction, 4,098 features)
+  - 22_aug_ablation.py                  (Training data policies P0-P4 evaluation)
+  - 23_features_v3.py                   (Multi-domain 695 feature extractor)
+  - 23_eval_v3.py                       (Feature block ablation studies)
+  - 26_boost_cv.py                      (LightGBM and XGBoost cross-validation trainers)
+  - infant_cry_dataset/aug_pool/aug_manifest.csv (Deterministic augmentation manifest)
+
+--- SPOKEN PRESENTATION SCRIPT FOR SHIVESH ---
+"Thank you, Yashik. I will explain our handcrafted feature engineering pipeline, our feature block
+ablation experiments, our data augmentation strategy, and our tree booster implementations.
+
+To capture the physical and mathematical properties of crying, we developed a 695-dimensional multi-domain
+feature representation across 5 acoustic blocks in '23_features_v3.py':
+1. Wavelet Scattering Transform (scat_, 234 features): Uses cascading wavelet filter banks (J=6, Q=16)
+   and modulus operations. It provides mathematical stability to small time-warping deformations.
+2. Mel-Frequency Cepstral Coefficients (mfcc_, 351 features): Standard vocal tract spectral envelopes.
+3. Spectral Descriptors (spec_, 99 features): Spectral centroid (brightness), rolloff, flatness, bandwidth.
+4. Pitch & Voice Quality (pitch_, 5 features): Fundamental frequency (F0), jitter, shimmer, and Harmonics-
+   to-Noise Ratio (HNR). Pain cries exhibit sharp F0 spikes and high jitter.
+5. Envelope Shape (shape_, 6 features): Attack time, decay rate, and temporal energy dynamics.
+
+In '23_eval_v3.py', we performed systematic Block Ablation Studies by removing one block at a time.
+We uncovered two vital insights:
+- Dropping Wavelet Scattering dropped Macro F1 from 0.7350 to 0.7206, proving scattering is essential.
+- Surprisingly, dropping MFCCs INCREASED accuracy to 85.67% and Macro F1 to 0.7475, while boosting Burping
+  recall from 31% to 35.2%. This proved MFCCs were introducing redundant collinearity and noise once
+  higher-order scattering coefficients were present.
+
+For augmentation in '22_build_aug_pool.py', we generated exactly 2 deterministic copies per minority clip
+using time-shifting, subtle pitch-invariant stretching, and volume gain. In '22_aug_ablation.py', we tested
+Policies P0 through P4 and confirmed that real data with balanced class weights (Policy P1) produced the
+cleanest decision boundaries.
+
+In '26_boost_cv.py', we trained LightGBM and GPU-accelerated XGBoost. LightGBM consistently outperformed
+XGBoost because its leaf-wise tree growth handles high-dimensional imbalanced splits with superior purity.
+Shriarya will now present our Deep Foundation Models and Meta-Learning Stacking Ensemble."
+
+--- EXPECTED VIVA QUESTIONS & ANSWERS FOR SHIVESH ---
+
+Q1: What is the Wavelet Scattering Transform and why is it useful for audio?
+A1: Wavelet Scattering cascades wavelet convolutions, complex modulus non-linearities, and spatial low-pass
+    averaging. Unlike standard spectrograms or MFCCs, scattering representations are mathematically proven
+    to be deformation-stable (Lipschitz continuous) and translation-invariant, capturing multi-scale cry
+    timbre without overfitting to minor tempo changes.
+
+Q2: Why did dropping MFCCs improve your LightGBM model?
+A2: MFCCs (351 features) and Scattering (234 features) both capture spectral envelope shapes. Because
+    scattering captures higher-order non-linear interactions, keeping 351 MFCC features created high
+    dimensionality and noise. Removing MFCCs reduced feature count to 344, reducing tree split variance
+    and raising Macro F1 by +0.0125.
+
+Q3: What acoustic features distinguish 'Physical Pain' from normal 'Needs'?
+A3: Pain cries exhibit elevated Fundamental Frequency (F0 > 450 Hz) due to vocal fold tension, high jitter
+    (cycle-to-cycle pitch instability), high shimmer (amplitude instability), and high spectral centroid
+    (acoustic harshness/brightness). 'Needs' cries show lower, more rhythmic harmonic contours.
+
+Q4: Why was deterministic augmentation preferred over random sampling?
+A4: Random sampling with replacement can duplicate a single clip 10+ times while omitting others,
+    biasing the model toward individual recording artifacts. Our deterministic pool ('aug_manifest.csv')
+    generates exactly 2 distinct augmented variations per source file with fixed random seeds.
+
+====================================================================================================
+SECTION 4: PERSON 3 - SHRIARYA
+====================================================================================================
+Role: Audio Foundation Models, Deep Neural Head (GPU), Meta-Learning Stacker & Statistical Proof
+
+Associated Code Files:
+  - 24_embeddings_v2.py                 (True-length GPU extraction for 4 foundation models)
+  - 24_embeddings_cv.py                 (Foundation model benchmark leaderboard)
+  - 25_neural_cv.py                     (4-way multimodal MLP head with Focal Loss & Mixup)
+  - 27_stack_cv.py                      (Multinomial Logistic Stacker & Logit Offset tuning)
+  - 28_final_report.py                  (Paired group-bootstrap hypothesis testing suite)
+  - infant_cry_dataset/results/cv/      (Contains all 31 out-of-fold prediction .npy arrays)
+
+--- SPOKEN PRESENTATION SCRIPT FOR SHRIARYA ---
+"Thank you, Shivesh. I will cover our Deep Audio Foundation Models, our GPU-accelerated Neural Head,
+our Meta-Learning Stacking Ensemble, and our formal statistical validation.
+
+While handcrafted features capture physical acoustics, large pre-trained foundation models capture deep
+contextual audio representations. In '24_embeddings_v2.py', we extracted true-length embeddings from four
+distinct architectures:
+1. AST (Audio Spectrogram Transformer): 2D patch self-attention trained on AudioSet (1,536-d).
+   AST was our best single foundation model, achieving 83.49% accuracy and 94.3% Scared recall.
+2. Microsoft WavLM Base+: Middle layers 4–8 mean+std pooling (1,536-d) -> 81.79% accuracy.
+3. Facebook wav2vec 2.0: Middle layers 4–8 representation (1,536-d) -> 82.08% accuracy.
+4. PANNs CNN14: 14-layer convolutional audio network (2,048-d) -> 78.94% accuracy.
+
+In '25_neural_cv.py', we concatenated all four embeddings into a 6,656-dimensional multimodal vector and
+trained a 3-layer MLP Neural Head on an NVIDIA RTX GPU. To overcome minority class imbalance, we implemented:
+- Focal Loss (gamma = 2.0): Down-weights easy 'Needs' examples and heavily penalizes errors on 'Burping'.
+- Mixup Augmentation (alpha = 0.2): Blends pairs of embeddings and target labels to smooth decision surfaces.
+- 5-Seed Averaging: 5 random seeds x 5 folds = 25 neural runs.
+This neural head achieved 55.5% Burping recall—the highest of any single model—and 0.7696 Macro F1.
+
+In '27_stack_cv.py', we built our winning Meta-Learning Stacker. It takes out-of-fold log-probabilities
+from our top-4 diverse models (mlp_concat_head, lgbm_v3_drop_mfcc, lgbm_v2cv, and lgbm_v3_default) and trains
+a Multinomial Logistic Regression. We then optimized class-wise Logit Offsets strictly inside the training fold.
+
+In '28_final_report.py', we proved the validity of our gains using 2,000-sample paired group-bootstrap
+hypothesis testing. Our final model achieves 87.66% Accuracy and 0.7993 Macro F1, delivering a statistically
+significant gain of +3.57% accuracy (95% CI: [+2.65%, +4.48%], p < 0.05). Thank you, and we welcome your questions."
+
+--- EXPECTED VIVA QUESTIONS & ANSWERS FOR SHRIARYA ---
+
+Q1: Why did AST (Audio Spectrogram Transformer) outperform speech models like wav2vec2 and WavLM?
+A1: wav2vec 2.0 and WavLM are pre-trained on adult human spoken language (phonemes and grammar). Infant
+    crying is non-verbal acoustic event sound with wideband shrieks and abrupt dynamic shifts. AST was
+    pre-trained on AudioSet (2 million environmental sound clips), allowing its 2D spectrogram patch
+    attention to capture non-speech acoustic textures much more effectively.
+
+Q2: How does Focal Loss work mathematically?
+A2: Standard cross-entropy is CE = -log(p_t). When 64% of samples are easy 'Needs' cries, gradients are
+    dominated by majority samples. Focal Loss introduces a modulating factor: FL = -(1 - p_t)^gamma * log(p_t).
+    With gamma = 2.0, an easy sample with confidence p_t = 0.9 has its loss scaled down by (1 - 0.9)^2 = 0.01
+    (a 99% reduction), forcing backpropagation to focus on minority 'Burping' and 'Pain' errors.
+
+Q3: How does the Stacker with Logit Offsets work without data leakage?
+A3: The stacker trains a logistic regression on the out-of-fold log-probabilities of the 4 member models.
+    To prevent bias toward the majority class, we grid-search an additive offset vector [o0, o1, o2, o3]
+    on the training fold log-probabilities to maximize accuracy while constraining Macro F1 loss. The tuned
+    offsets are then added to the test fold logits before softmax.
+
+Q4: What is the paired group bootstrap test in 28_final_report.py?
+A4: To prove our +3.57% gain was not random luck, we resample cluster groups 2,000 times with replacement.
+    On each resample, we compute Difference = Accuracy(Final) - Accuracy(Baseline). The resulting 95%
+    confidence interval is [+2.65%, +4.48%]. Because the interval does not cross zero, the gain is
+    statistically significant at p < 0.05.
+
+====================================================================================================
+SECTION 5: COMPLETE BENCHMARK LEADERBOARD (REFERENCE FOR ALL)
+====================================================================================================
+
+Model Architecture                  Accuracy (95% CI)        Macro F1 (95% CI)        Burping Recall
+----------------------------------------------------------------------------------------------------
+Historical KNN (Old 489 test)       59.30%                   0.5450                   ~20.0%
+Historical Random Forest (Old test) 68.10%                   0.6029                   ~28.0%
+Baseline: LGBM v2cv (Policy P1)     84.09% [82.82, 85.31]   0.7388 [0.7182, 0.7579]  38.7% [32.9, 44.8]
+LGBM Full V3 (695 features)         85.36% [84.23, 86.49]   0.7350 [0.7147, 0.7559]  31.0% [25.2, 37.3]
+LGBM V3 Drop-MFCC (344 features)    85.67% [84.50, 86.85]   0.7475 [0.7267, 0.7674]  35.2% [29.2, 41.2]
+SVM on PANNs CNN14 (2,048-d)        78.94% [77.62, 80.28]   0.5906 [0.5706, 0.6117]  18.1% [13.2, 23.0]
+SVM on WavLM Base+ (1,536-d)        81.79% [80.58, 83.05]   0.6602 [0.6389, 0.6811]  25.0% [19.8, 30.6]
+SVM on wav2vec 2.0 (1,536-d)        82.08% [80.83, 83.32]   0.6665 [0.6456, 0.6866]  26.0% [20.6, 31.8]
+SVM on AST Transformer (1,536-d)    83.49% [82.23, 84.73]   0.7201 [0.6992, 0.7414]  33.1% [27.4, 39.4]
+MLP Concat Head (6,656-d, GPU)      84.19% [82.95, 85.37]   0.7696 [0.7524, 0.7867]  55.5% [49.7, 61.4]
+Soft Voting Top-2 Ensemble          86.49% [85.36, 87.62]   0.7638 [0.7441, 0.7831]  38.4% [32.3, 44.6]
+----------------------------------------------------------------------------------------------------
+WINNING MODEL (Stacker + Offsets)   87.66% [86.57, 88.75]   0.7993 [0.7812, 0.8162]  49.0% [42.6, 55.1]
+----------------------------------------------------------------------------------------------------
+Statistically Significant Gain:     +3.57% [+2.65, +4.48]   +0.0607 [+0.046, +0.075] +10.3% Burping Gain
+
+====================================================================================================
+SECTION 6: HAND-OFF TRANSITIONS DURING YOUR PRESENTATION
+====================================================================================================
+
+1. Yashik -> Shivesh:
+   "Now that we have covered the clinical problem, noise cleaning, and our leak-free grouped cross-
+   validation framework, Shivesh will explain how we engineered our handcrafted acoustic features and
+   conducted ablation studies."
+
+2. Shivesh -> Shriarya:
+   "With our handcrafted tree baselines established, Shriarya will now present how we extracted deep
+   audio foundation models and built our winning neural stacking ensemble."
+
+3. Shriarya -> Examining Committee:
+   "That concludes our presentation on the 4-Class Infant Cry Classification Pipeline. We are now open
+   to any questions from the panel."
+====================================================================================================

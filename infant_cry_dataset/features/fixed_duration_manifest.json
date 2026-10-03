@@ -1,0 +1,13 @@
+{
+  "computed_from": "original (non-augmented) TRAIN files only",
+  "n_files_used": 2414,
+  "mean_duration_seconds": 3.976665285832643,
+  "median_duration_seconds": 3.99,
+  "std_duration_seconds": 1.1465081628590639,
+  "min_duration_seconds": 1.02,
+  "max_duration_seconds": 7.05,
+  "sample_rate_used_for_conversion_hz": 22050,
+  "fixed_length_samples": 87685,
+  "fixed_length_seconds": 3.976643990929705,
+  "rule": "pad with zeros if shorter than fixed length; cut off (crop) if longer"
+}

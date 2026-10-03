@@ -1,0 +1,71 @@
+{
+  "name": "lgbm_features_pitch_test",
+  "n": 489,
+  "accuracy": 0.7995910020449898,
+  "balanced_accuracy": 0.7122144288774126,
+  "macro_f1": 0.7053715947608067,
+  "per_class": {
+    "burping": {
+      "precision": 0.5,
+      "recall": 0.3548387096774194,
+      "f1": 0.41509433962264153,
+      "support": 31
+    },
+    "needs": {
+      "precision": 0.8686868686868687,
+      "recall": 0.8295819935691319,
+      "f1": 0.8486842105263158,
+      "support": 311
+    },
+    "physical_pain": {
+      "precision": 0.6262626262626263,
+      "recall": 0.7948717948717948,
+      "f1": 0.7005649717514124,
+      "support": 78
+    },
+    "scared": {
+      "precision": 0.8450704225352113,
+      "recall": 0.8695652173913043,
+      "f1": 0.8571428571428571,
+      "support": 69
+    }
+  },
+  "confusion_matrix": [
+    [
+      11,
+      17,
+      3,
+      0
+    ],
+    [
+      10,
+      258,
+      33,
+      10
+    ],
+    [
+      0,
+      15,
+      62,
+      1
+    ],
+    [
+      1,
+      7,
+      1,
+      60
+    ]
+  ],
+  "class_names": [
+    "burping",
+    "needs",
+    "physical_pain",
+    "scared"
+  ],
+  "majority_baseline": {
+    "accuracy": 0.6359918200408998,
+    "balanced_accuracy": 0.25,
+    "macro_f1": 0.194375,
+    "class": "needs"
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "name": "xgb_features_wav2vec2_test",
+  "n": 489,
+  "accuracy": 0.7995910020449898,
+  "balanced_accuracy": 0.7420363311558299,
+  "macro_f1": 0.7241528667240392,
+  "per_class": {
+    "burping": {
+      "precision": 0.5185185185185185,
+      "recall": 0.45161290322580644,
+      "f1": 0.4827586206896552,
+      "support": 31
+    },
+    "needs": {
+      "precision": 0.8780487804878049,
+      "recall": 0.8102893890675241,
+      "f1": 0.842809364548495,
+      "support": 311
+    },
+    "physical_pain": {
+      "precision": 0.6237623762376238,
+      "recall": 0.8076923076923077,
+      "f1": 0.7039106145251397,
+      "support": 78
+    },
+    "scared": {
+      "precision": 0.8378378378378378,
+      "recall": 0.8985507246376812,
+      "f1": 0.8671328671328671,
+      "support": 69
+    }
+  },
+  "confusion_matrix": [
+    [
+      14,
+      16,
+      0,
+      1
+    ],
+    [
+      13,
+      252,
+      36,
+      10
+    ],
+    [
+      0,
+      14,
+      63,
+      1
+    ],
+    [
+      0,
+      5,
+      2,
+      62
+    ]
+  ],
+  "class_names": [
+    "burping",
+    "needs",
+    "physical_pain",
+    "scared"
+  ],
+  "majority_baseline": {
+    "accuracy": 0.6359918200408998,
+    "balanced_accuracy": 0.25,
+    "macro_f1": 0.194375,
+    "class": "needs"
+  }
+}

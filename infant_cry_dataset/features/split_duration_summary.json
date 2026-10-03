@@ -1,0 +1,29 @@
+{
+  "train": {
+    "n_files": 4000,
+    "raw_mean_duration_seconds": 3.9639766666666656,
+    "raw_min_duration_seconds": 1.02,
+    "raw_max_duration_seconds": 7.050022675736962,
+    "n_padded": 1309,
+    "n_cropped": 2691,
+    "n_unchanged": 0
+  },
+  "val": {
+    "n_files": 486,
+    "raw_mean_duration_seconds": 4.050345921633399,
+    "raw_min_duration_seconds": 1.0500226757369615,
+    "raw_max_duration_seconds": 7.050022675736962,
+    "n_padded": 192,
+    "n_cropped": 294,
+    "n_unchanged": 0
+  },
+  "test": {
+    "n_files": 489,
+    "raw_mean_duration_seconds": 4.11639692277729,
+    "raw_min_duration_seconds": 1.08,
+    "raw_max_duration_seconds": 7.050022675736962,
+    "n_padded": 174,
+    "n_cropped": 315,
+    "n_unchanged": 0
+  }
+}

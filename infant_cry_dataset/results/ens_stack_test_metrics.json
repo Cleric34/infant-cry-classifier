@@ -1,0 +1,71 @@
+{
+  "name": "ens_stack_test",
+  "n": 489,
+  "accuracy": 0.8323108384458078,
+  "balanced_accuracy": 0.8128061770978345,
+  "macro_f1": 0.7711238632894073,
+  "per_class": {
+    "burping": {
+      "precision": 0.4722222222222222,
+      "recall": 0.5483870967741935,
+      "f1": 0.5074626865671642,
+      "support": 31
+    },
+    "needs": {
+      "precision": 0.9261992619926199,
+      "recall": 0.8070739549839229,
+      "f1": 0.8625429553264605,
+      "support": 311
+    },
+    "physical_pain": {
+      "precision": 0.6574074074074074,
+      "recall": 0.9102564102564102,
+      "f1": 0.7634408602150538,
+      "support": 78
+    },
+    "scared": {
+      "precision": 0.918918918918919,
+      "recall": 0.9855072463768116,
+      "f1": 0.951048951048951,
+      "support": 69
+    }
+  },
+  "confusion_matrix": [
+    [
+      17,
+      13,
+      1,
+      0
+    ],
+    [
+      19,
+      251,
+      35,
+      6
+    ],
+    [
+      0,
+      7,
+      71,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      68
+    ]
+  ],
+  "class_names": [
+    "burping",
+    "needs",
+    "physical_pain",
+    "scared"
+  ],
+  "majority_baseline": {
+    "accuracy": 0.6359918200408998,
+    "balanced_accuracy": 0.25,
+    "macro_f1": 0.194375,
+    "class": "needs"
+  }
+}
